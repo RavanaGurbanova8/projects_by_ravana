@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+// Design a small lottery game. The system should produce a two-digit number
+// You should also ask the user to guess this number
+// If the user guesses the number exactly correctly, $10000;
+// If the user knows the digits of the number, i.e. if he wrote 56 instead of 65, $5000
+// If the user knows only one digit of the lucky number, he wins $1000.
+        Scanner bingo = new Scanner(System.in);
+        int actual = (int) (Math.random() * 99 + 1);
+        System.out.println("Enter your estimated point: ");
+        int estimated = bingo.nextInt();
+        int estimated_first = estimated / 10;
+        int estimated_second = estimated % 10;
+        int actual_first = actual / 10;
+        int actual_second = actual % 10;
+        if(actual == estimated){
+            System.out.println("Estimated point: " + estimated);
+            System.out.println("Actual point: " + actual);
+            System.out.println("Congratulations! You won $10000!");
+        } else if (estimated_first == actual_second && estimated_second ==actual_first ) {
+            System.out.println("Estimated point: " + estimated);
+            System.out.println("Actual point: " + actual);
+            System.out.println("Congratulations! You won $5000!");
+        } else if (estimated_first == actual_first ||
+        estimated_first == actual_second ||
+        estimated_second == actual_first ||
+        estimated_second == actual_second) {
+            System.out.println("Estimated point: " + estimated);
+            System.out.println("Actual point: " + actual);
+            System.out.println("Congratulations! You won $1000!");
+        }
+        else{
+            System.out.println("Estimated point: " + estimated);
+            System.out.println("Actual point: " + actual);
+            System.out.println("Sorry try again!");
+        }
+
+
+
+    }
+}
+
