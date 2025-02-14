@@ -1,0 +1,74 @@
+"""
+This script simulates a shopping system called 'TakeCare' for purchasing skincare and haircare products. 
+Users can view available products, add items to their shopping bucket, remove items, and check their current bucket. 
+At the end of the session, the total price is calculated and displayed.
+
+Functions:
+- The main loop provides the following menu options:
+    1. Look at products: Displays a list of available products from the catalog.
+    2. Add to your bucket: Allows the user to add a product to their bucket. If the product is already in the bucket, its quantity increases by 1.
+    3. Remove from bucket: Allows the user to remove a product from their bucket. If the quantity reaches zero, the product is removed from the bucket.
+    4. Look at your bucket: Displays the current contents of the bucket with product names and quantities.
+    5. Exit: Ends the shopping session and calculates the total cost of the items in the bucket.
+
+Variables:
+- `katalog`: A dictionary containing product names as keys and their prices as values.
+- `bucket`: A dictionary that stores products added by the user along with their quantities.
+
+User Interaction:
+- The user is prompted to enter a menu choice. Based on the choice, different actions are performed.
+- The loop continues until the user enters '5' to exit.
+- After exiting, the script calculates the total price of all items in the bucket and displays a detailed bill.
+
+Potential Improvements:
+- Handle edge cases such as entering an invalid product name or trying to remove a product with zero quantity.
+- Improve menu interaction to make it more user-friendly.
+
+Thank you for shopping with 'TakeCare'!
+"""
+
+
+katalog = {'centella moisturizing cream': 12.5, 'spf50+ anti-blemish sun cream':12.1, 'hyaluronic acid toner': 20.99, 'azelaic acid serum 10%': 18.79, 'niacinamide cream 10%':16.89, 'c vitamine toner 10%': 14.99, 
+           'glycolic acid serum 7%': 18.99, 'clarifying clay mask':21.2, 'shampoo for oily hair': 19.5, 'anti dandruff hair toner':22.89, 'cleaning micellar water': 13.49,
+           'shower gel': 22.39,'collagen eye mask': 17.99, 'retinol 0.5% serum':15.69, 'hyaluronic acid moisturizing cream': 18.79, 'face cleansining gel' :19.99, 
+           'night repair serum': 14.59, 'hair conditioner': 24.19, 'anti hair lose shampoo' : 23.19, 'repairing hair oil': 24.99, 'rosemary hair toner': 26.79}
+bucket = {}
+print(f"Hey! Welcome to 'TakeCare' shopping system!\n1. Look at products \n2. Add to your bucket\n3. Remove from bucket\n4. Look at your bucket\n5. Exit")
+info = input("Enter your choice: ")
+while info != "5":
+  if info == "1":
+    print(katalog.keys())
+  elif info == "2":
+    choice =  input("Enter the product you are looking for. ")
+    if choice in katalog.keys():
+      if choice not in bucket.keys():
+        bucket[choice] = 1
+      else:
+        bucket[choice] += 1
+    else:
+      print("Product not found!")
+  elif info == "3":
+    choice =  input("Enter the product you want to remove. ")
+    if choice not in bucket.keys():
+      print("This product is not in bucket")
+    if choice in katalog.keys():
+      bucket[choice] -= 1
+      if bucket[choice] == 1:
+        bucket.pop(choice)
+    else:
+      print("Product not found!")
+  elif info == "4":
+    print(bucket)
+  else:
+    print("Enter valid choice of menu!")
+  info = input("Enter your choice: ")
+
+calculate = 0
+for x in bucket:
+  if x in katalog.keys():
+    calculate += katalog[x]
+print(calculate)
+for x in set(bucket):
+    print(f"Product: {x} Price per product: {katalog[x]} AZN  Count: {bucket[x]} Total price: {bucket[x] * katalog[x]}")
+print(f"Total price: {calculate:.2f} AZN")
+print("\nThank you for your shopping! See you<3")
